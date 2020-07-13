@@ -54,22 +54,14 @@ Function Get-VMTools {
     }#BEGIN
 
     PROCESS {
-        #Gather VM Names
-        <#$Vm = ForEach ($Node in $VmName) {
-        Get-VM -Name $Node.Name
-    }#>
-        if($Null -eq $Connection){
 
-        }
-        TRY{
+        TRY {
             $VM = Get-Vm $VmName
         }
-        CATCH{
+        CATCH {
             Write-Error "Empty or invalid value specified for VM"
         }
         
-    
-       
         #Information gathering begins here
         Foreach ($V in $Vm) {
             $VMTools = Get-View -ViewType VirtualMachine -Filter @{"name" = "$V" } -ErrorAction Stop 
